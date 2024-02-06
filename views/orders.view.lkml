@@ -33,6 +33,7 @@ view: orders {
 
   dimension: gender {
     type: string
+    label: "shashjgahjkafhkshfkjgkljhjo"
     sql: ${TABLE}.gender ;;
   }
 
