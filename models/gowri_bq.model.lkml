@@ -9,8 +9,8 @@ include: "/sql_runner_query.view.lkml"
 # use the Quick Help panel on the right to see documentation.
 include: "/test_pdt.view.lkml"
 datagroup: gowri_bq_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  sql_trigger: SELECT EXTRACT(HOUR FROM CURRENT_TIMESTAMP());;
+  #max_cache_age: "1 hour"
 }
 persist_with: gowri_bq_default_datagroup
 
