@@ -9,7 +9,7 @@ include: "/sql_runner_query.view.lkml"
 # use the Quick Help panel on the right to see documentation.
 
 datagroup: gowri_bq_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 persist_with: gowri_bq_default_datagroup
@@ -34,6 +34,8 @@ explore: tab {
 # Each joined view also needs to define a primary key.
 
 explore: dummy {}
+
+explore: pdt {}
 
 explore: distribution_centers {}
 
