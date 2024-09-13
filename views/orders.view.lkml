@@ -70,6 +70,18 @@ view: orders {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: campaign_session_code {
+    label: "Campaign Session NCID"
+    group_label: "Campaign Attributes"
+    description: ""
+    #sql: CASE WHEN table_suffix IN ('amazon_redirect', 'non_amazon_redirect') AND ${TABLE}.click_info_campaign_session_code IS NOT NULL THEN ${TABLE}.click_info_campaign_session_code ELSE ${TABLE}.campaign_session_code END ;;
+    sql: {%- assign case_var = "CASE WHEN ${TABLE}.status IS NOT NULL THEN ${TABLE}.status ELSE ${TABLE}.gender END" -%}
+      (@{AMAZON_NON_ATTRIBUTABLE_CASE}) ;;
+    type: string
+    hidden: no
+  }
+
+
   dimension: user_id {
     type: number
     # hidden: yes
