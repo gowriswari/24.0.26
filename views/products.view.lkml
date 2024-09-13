@@ -20,11 +20,13 @@ view: products {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
-  }
+    html: <p style="text-align: right">{{value}}</p>;;
+ }
 
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+     html: <a href="https://store.google.com/collection/accessories_wall?pli=1&hl=en-GB={{value}}">{{value}}</a> ;;
   }
 
   dimension: cost {
@@ -73,16 +75,29 @@ view: products {
     drill_fields: [detail*]
   }
 
+  measure: profit{
+    type: sum
+    sql: ${retail_price} - 0.5 ;;
+    html:
+
+    {% if value < 2 %}
+    <p style="color:red">({{rendered_value}})</p>
+    {% else %}<p style="color:green">{{rendered_value}}</p>
+    {% endif %};;
+    value_format_name: usd
+
+    }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	name,
-	distribution_centers.name,
-	distribution_centers.id,
-	inventory_items.count,
-	order_items.count
-	]
+  id,
+  name,
+  distribution_centers.name,
+  distribution_centers.id,
+  inventory_items.count,
+  order_items.count
+  ]
   }
 
 }
